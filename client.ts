@@ -1,10 +1,14 @@
 import type { RequestApi, ResponseApi } from './shared/api'
 import { Socket } from "./shared/socket"
 
-const socket = Socket.fromUrl<RequestApi, ResponseApi>("ws://127.0.0.1:8080")
+const rpc = Socket.fromUrl<RequestApi, ResponseApi>("ws://127.0.0.1:8080")
 
-const response = await socket.request({
+const score = await rpc.call({
   type: "score"
 })
 
-console.log("Response", response)
+console.log("Score:", score.data)
+
+const greeting = await rpc.call({ type: "greet", name: "Testy McTestFace" })
+
+console.log("Greeting", greeting.data)

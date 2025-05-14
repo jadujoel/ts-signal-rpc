@@ -103,6 +103,8 @@ export class Socket<TRequestApi, TResponseApi> extends EventTarget {
     return promise.promise
   }
 
+  call = this.request
+
   async respondTo(request: RpcRequest<TRequestApi>, data: TResponseApi) {
     const message = <RpcResponse<TResponseApi>>{
       category: "response",
@@ -115,7 +117,7 @@ export class Socket<TRequestApi, TResponseApi> extends EventTarget {
     ws.send(str)
   }
 
-  async matchRequests(meth: (data: TRequestApi) => TResponseApi) {
+  async match(meth: (data: TRequestApi) => TResponseApi) {
     this.addEventListener("message", async (ev) => {
       const msg: RpcApi<TRequestApi> = JSON.parse((ev as MessageEvent).data)
       if (msg.category === "request") {
