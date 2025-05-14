@@ -1,0 +1,15 @@
+{
+  "name": "ts-signal-rpc",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "signal-polyfill": "0.2.2"
+  }
+}
